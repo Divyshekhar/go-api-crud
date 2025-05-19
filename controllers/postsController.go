@@ -12,7 +12,7 @@ func PostsCreate(c *gin.Context) {
 		Title string `json:"title"`
 	}
 
-	err := c.Bind(&body)
+	err := c.ShouldBindJSON(&body)
 	if err != nil {
 		c.JSON(401, gin.H{
 			"message": "wrong type of Data",
@@ -57,7 +57,7 @@ func PostsUpdate(c *gin.Context) {
 		Body  string
 		Title string
 	}
-	c.Bind(&body)
+	c.ShouldBindJSON(&body)
 	var post models.Post
 	initializers.DB.First(&post, id)
 
